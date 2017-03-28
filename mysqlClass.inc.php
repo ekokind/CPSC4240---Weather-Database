@@ -1,31 +1,3 @@
-mysqlClass.inc.php
-DETAILS
-ACTIVITY
-Sharing Info
-Not shared
-General Info
-Type
-Unknown File
-Size
-2 KB (2,383 bytes)
-Storage used
-2 KB (2,383 bytes)
-Location
-metube tmeplate files
-Owner
-me
-Modified
-10:16 AM by me
-Opened
-11:40 AM by me
-Created
-10:16 AM with Google Drive Web
-Description
-Add a description
-Download permissions
-Viewers can download
-
-
 <?php
 class mysql_db {
 
