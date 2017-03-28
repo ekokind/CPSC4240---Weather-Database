@@ -19,6 +19,8 @@
 		$gps = $result_row[2];
 		$pressure = $result_row[3];
 		$humidity = $result_row[4];
+
+		echo $timestamp;
 	?>
 
 </body>
