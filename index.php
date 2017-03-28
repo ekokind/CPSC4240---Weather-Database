@@ -6,6 +6,7 @@
 
 <?php
 	session_start();
+	include_once "mysqlClass.inc.php";
 ?>
 
 <body>
@@ -21,6 +22,10 @@
 		$humidity = $result_row[4];
 
 		echo $timestamp;
+		echo $temp;
+		echo $gps;
+		echo $pressure;
+		echo $humidity;
 	?>
 
 </body>
