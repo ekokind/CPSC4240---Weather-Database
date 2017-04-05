@@ -2,6 +2,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title> Weather Database </title>
+	<meta http-equiv="refresh" content="300">
 </head>
 
 
@@ -16,11 +17,11 @@
 	    	exit();
 		}
 
-		echo 'Connected successfully';
+		//echo 'Connected successfully';
 
 		if ($result = mysqli_query($link, "SELECT DATABASE()")) {
 	    	$row = mysqli_fetch_row($result);
-	    	printf("Default database is %s.\n", $row[0]);
+	    	//printf("Default database is %s.\n", $row[0]);
 	    	mysqli_free_result($result);
 		}
 
@@ -35,6 +36,9 @@
 		$pressure = $row[3];
 		$humidity = $row[4];
 	?>
+	<!--<script type="text/javascript">
+			window.location.reload(true);
+	</script>-->
 
 	<ul>
 		<li>Timestamp: <?php echo $timestamp?></li>
