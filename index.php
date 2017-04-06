@@ -3,6 +3,7 @@
 	<meta charset="UTF-8">
 	<title> Weather Database </title>
 	<meta http-equiv="refresh" content="300">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
 </head>
 
 
@@ -36,9 +37,22 @@
 		$pressure = $row[3];
 		$humidity = $row[4];
 	?>
-	<!--<script type="text/javascript">
-			window.location.reload(true);
-	</script>-->
+	<canvas id="myChart"></canvas>	
+	<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+			  type: 'line',
+			  data: {
+			    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+			    datasets: [{
+			      label: 'Temperature',
+			      data: [12, 19, 3, 17, 6, 3, 7],
+			      backgroundColor: "rgba(153,255,51,0.4)"
+			    }] 
+			    
+			  }
+			});
+	</script>
 
 	<ul>
 		<li>Timestamp: <?php echo $timestamp?></li>
