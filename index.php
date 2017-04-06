@@ -36,24 +36,8 @@
 		$gps = $row[2];
 		$pressure = $row[3];
 		$humidity = $row[4];
-	?>
-	<canvas id="myChart"></canvas>	
-	<script>
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var myChart = new Chart(ctx, {
-			  type: 'line',
-			  data: {
-			    labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-			    datasets: [{
-			      label: 'Temperature',
-			      data: [12, 19, 3, 17, 6, 3, 7],
-			      backgroundColor: "rgba(153,255,51,0.4)"
-			    }] 
-			    
-			  }
-			});
-	</script>
 
+	?>
 	<ul>
 		<li>Timestamp: <?php echo $timestamp?></li>
 		<li>Temperature: <?php echo $temp?> &deg;F</li>
@@ -61,6 +45,48 @@
 		<li>Pressure: <?php echo $pressure?> in</li>
 		<li>Humidity: <?php echo $humidity?>%</li>
 	</ul>
+
+	<?php
+		mysqli_free_result($result);
+		//getting timestamp and temp to populate the graph
+		$result = mysqli_query($link, "SELECT `timestamp`, temperature FROM weather_attrs ORDER BY timestamp DESC LIMIT 7");
+		//$i=0;
+		while($row=mysqli_fetch_assoc($result)){
+			$array[] = $row;
+		//	$ts[$i] = array($row['timestamp']);
+		//	$temp[$i] = array($row['temperature']);
+		//	$i++;
+		}
+	?>
+	<canvas id="myChart"></canvas>	
+	<script>
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+			  type: 'line',
+			  data: {
+			    labels: ['<?php echo $array[6]['timestamp']?>', 
+			    		'<?php echo $array[5]['timestamp']?>', 
+			    		'<?php echo $array[4]['timestamp']?>', 
+			    		'<?php echo $array[3]['timestamp']?>', 
+			    		'<?php echo $array[2]['timestamp']?>', 
+			    		'<?php echo $array[1]['timestamp']?>', 
+			    		'<?php echo $array[0]['timestamp']?>'],
+			    datasets: [{
+			      label: 'Temperature',
+			      data: ['<?php echo $array[6]['temperature']?>',
+			      		'<?php echo $array[5]['temperature']?>',
+			      		'<?php echo $array[4]['temperature']?>',
+			      		'<?php echo $array[3]['temperature']?>',
+			      		'<?php echo $array[2]['temperature']?>',
+			      		'<?php echo $array[1]['temperature']?>',
+			      		'<?php echo $array[0]['temperature']?>'],
+			      backgroundColor: "rgba(153,255,51,0.4)"
+			    }]     
+			  }
+			});
+	</script>
+
+
 		
 	</body>
 	
