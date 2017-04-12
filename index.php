@@ -5,10 +5,18 @@
 	<meta http-equiv="refresh" content="300">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
 </head>
+<style type="text/css">
+	Canvas {
+		padding: 0;
+		margin: auto;
+		display: block;
+	}
 
+</style>
 
 <html>
 	<body>
+	<h1 align="center">Clemson Weather</h1>
 	<?php
 	//	session_start(); //cant find this anywhere
 	//	include_once "mysqlClass.inc.php"; //has the functions
@@ -31,7 +39,7 @@
 		$result = mysqli_query($link, "SELECT * FROM weather_attrs ORDER BY timestamp DESC LIMIT 1");
 		$row = mysqli_fetch_row($result);
 		$timestamp = $row[0];
-		echo $timestamp;
+		#echo $timestamp;
 		$temp = $row[1];
 		$gps = $row[2];
 		$pressure = $row[3];
@@ -58,8 +66,9 @@
 		//	$i++;
 		}
 	?>
-	<canvas id="myChart"></canvas>	
+	<canvas id="myChart" width="700" height="500"></canvas>	
 	<script>
+		//Chart.defaults.global.maintainAspectRatio = false;
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var myChart = new Chart(ctx, {
 			  type: 'line',
@@ -82,6 +91,9 @@
 			      		'<?php echo $array[0]['temperature']?>'],
 			      backgroundColor: "rgba(153,255,51,0.4)"
 			    }]     
+			  },
+			  options: {
+			  	responsive: false
 			  }
 			});
 	</script>
