@@ -48,7 +48,7 @@
 	?>
 	<ul>
 		<li>Timestamp: <?php echo $timestamp?></li>
-		<li>Temperature: <?php echo $temp?> &deg;F</li>
+		<li>Temperature: <?php echo $temp?> </li>
 		<li>GPS Location: <?php echo $gps?></li>
 		<li>Pressure: <?php echo $pressure?> in</li>
 		<li>Humidity: <?php echo $humidity?>%</li>
