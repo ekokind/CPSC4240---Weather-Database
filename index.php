@@ -15,6 +15,44 @@
 </style>
 
 <html>
+	<script>
+//// UUID Generator from GitHub User Kaizhu256
+//// https://gist.github.com/kaizhu256/4482069
+function uuid () {
+  'use strict';
+
+  var exports = {};
+
+  exports.uuid4 = function () {
+    //// return uuid of form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+    var uuid = '', ii;
+    for (ii = 0; ii < 32; ii += 1) {
+      switch (ii) {
+      case 8:
+      case 20:
+        uuid += '-';
+        uuid += (Math.random() * 16 | 0).toString(16);
+        break;
+      case 12:
+        uuid += '-';
+        uuid += '4';
+        break;
+      case 16:
+        uuid += '-';
+        uuid += (Math.random() * 4 | 8).toString(16);
+        break;
+      default:
+        uuid += (Math.random() * 16 | 0).toString(16);
+      }
+    }
+    return uuid;
+  };
+
+  //// output
+  document.getElementById('uuidResult').innerText = "Your UUID4: " + exports.uuid4();
+};
+</script>
+	
 	<body>
 	<h1 align="center">Clemson Weather</h1>
 	<?php
@@ -97,8 +135,9 @@
 			  }
 			});
 	</script>
-
-
+<h2>Client Identification</h2>
+<h3 id="uuidResult">Your UUID4: </h3>
+<button id="uuidGenerator" type="button" onclick="uuid()">Get a new client UUID</button>
 		
 	</body>
 	
