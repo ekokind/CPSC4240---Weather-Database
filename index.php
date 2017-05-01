@@ -15,7 +15,8 @@
 </style>
 
 <html>
-	<script>
+
+<script>
 //// UUID Generator from GitHub User Kaizhu256
 //// https://gist.github.com/kaizhu256/4482069
 function uuid () {
@@ -52,13 +53,12 @@ function uuid () {
   document.getElementById('uuidResult').innerText = "Your UUID4: " + exports.uuid4();
 };
 </script>
-	
 	<body>
 	<h1 align="center">Clemson Weather</h1>
 	<?php
 	//	session_start(); //cant find this anywhere
 	//	include_once "mysqlClass.inc.php"; //has the functions
-		$link = mysqli_connect('localhost', 'root', '', 'cpsc424_6jt3');
+		$link = mysqli_connect('localhost', 'cpsc424_eecr', 'L33tD@t@b@s3PAsSWoord', 'cpsc4240');
 		if (mysqli_connect_errno()){
 			printf("Connect failed: %s\n", mysqli_connect_error());
 	    	exit();
@@ -79,28 +79,25 @@ function uuid () {
 		$timestamp = $row[0];
 		#echo $timestamp;
 		$temp = $row[1];
-		$gps = $row[2];
-		$pressure = $row[3];
-		$humidity = $row[4];
-		
+		$pressure = $row[2];
+		$humidity = $row[3];
+
+
 		//decrypt
-                $key = 'thiskey';
-        //      $result = mysqli_query("SELECT *, CAST(AES_DECRYPT(gps, 'thiskey') AS CHAR(50)) gps_decrypt  FROM weather_attrs ORDER BY timestamp DESC LIMIT 1");
-                $gpsresult = mysqli_query($link, "SELECT timestamp, AES_DECRYPT(cryptgps, 'key') FROM weather_attrs WHERE cryptgps IS NOT NULL ORDER BY timestamp DESC LIMIT 1");
-                $gpsrow = mysqli_fetch_row($gpsresult);
-                $newgps = $gpsrow[1];
+		$key = 'thiskey';
+	//	$result = mysqli_query("SELECT *, CAST(AES_DECRYPT(gps, 'thiskey') AS CHAR(50)) gps_decrypt  FROM weather_attrs ORDER BY timestamp DESC LIMIT 1");
+		$gpsresult = mysqli_query($link, "SELECT timestamp, AES_DECRYPT(cryptgps, 'key') FROM weather_attrs ORDER BY timestamp DESC LIMIT 1");
+		$gpsrow = mysqli_fetch_row($gpsresult);
+		$newgps = $gpsrow[1];
 
-
-		
-
+	
 	?>
 	<ul>
-		<li>Timestamp: <?php echo $timestamp?></li>
-		<li>Temperature: <?php echo $temp?> </li>
-		<li>GPS Location: <?php echo $gps?></li>
-		<li>New GPS  <?php echo $newgps; ?></li>
+		<li>Timestamp (UTC): <?php echo $timestamp?></li>
+		<li>Temperature: <?php echo $temp?> &deg;F</li>
+		<li>GPS Location: <?php echo $newgps?></li>
 		<li>Pressure: <?php echo $pressure?> in</li>
-		<li>Humidity: <?php echo $humidity?>%</li>
+		<li>Humidity: <?php echo $humidity?></li>
 	</ul>
 
 	<?php
