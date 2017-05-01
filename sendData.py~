@@ -55,8 +55,8 @@ cnx = mysql.connector.connect(
 cursor = cnx.cursor()
 
 #Sending Data
-query = ("INSERT INTO weather_attrs(timestamp, temperature, pressure, humidity, session, cryptgps) VALUES (UTC_TIMESTAMP, %s, %s, %s, %s, AES_ENCRYPT(%s, 'key'))")
-args = (temperature, pressure, humidity, session_id, GPS_loc)
+query = ("INSERT INTO weather_attrs(timestamp, temperature, gps, pressure, humidity, session, cryptgps) VALUES (UTC_TIMESTAMP, %s, %s, %s, %s, %s, AES_ENCRYPT(%s, 'key'))")
+args = (temperature, GPS_loc, pressure, humidity, session_id, GPS_loc)
 #cursor.execute("INSERT INTO weather_attrs (timestamp, temperature, gps, pressure, humidity) VALUES (UTC_TIMESTAMP, '88', '32.77, 32.88', '30.10', '70')")
 cursor.execute(query, args);
 
