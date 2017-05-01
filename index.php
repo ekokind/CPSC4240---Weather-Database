@@ -82,12 +82,23 @@ function uuid () {
 		$gps = $row[2];
 		$pressure = $row[3];
 		$humidity = $row[4];
+		
+		//decrypt
+                $key = 'thiskey';
+        //      $result = mysqli_query("SELECT *, CAST(AES_DECRYPT(gps, 'thiskey') AS CHAR(50)) gps_decrypt  FROM weather_attrs ORDER BY timestamp DESC LIMIT 1");
+                $gpsresult = mysqli_query($link, "SELECT timestamp, AES_DECRYPT(cryptgps, 'key') FROM weather_attrs WHERE cryptgps IS NOT NULL ORDER BY timestamp DESC LIMIT 1");
+                $gpsrow = mysqli_fetch_row($gpsresult);
+                $newgps = $gpsrow[1];
+
+
+		
 
 	?>
 	<ul>
 		<li>Timestamp: <?php echo $timestamp?></li>
 		<li>Temperature: <?php echo $temp?> </li>
 		<li>GPS Location: <?php echo $gps?></li>
+		<li>New GPS  <?php echo $newgps; ?></li>
 		<li>Pressure: <?php echo $pressure?> in</li>
 		<li>Humidity: <?php echo $humidity?>%</li>
 	</ul>
