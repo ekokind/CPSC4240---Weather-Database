@@ -3,6 +3,16 @@ import random
 import urllib2
 import json
 import re
+import sys
+
+
+session_id = ""
+
+if(len(sys.argv) != 2 or len(sys.argv[1]) != 36):
+	print "run as ./sendData <UUID4> where UUID4 is a 36 character UUID"
+	sys.exit()
+else:
+	session_id = sys.argv[1]
 
 #wundergound data gathering
 f = urllib2.urlopen('http://api.wunderground.com/api/b5bc40ba034473fd/geolookup/conditions/q/IA/Clemson.json')
@@ -46,7 +56,7 @@ cursor = cnx.cursor()
 
 #Sending Data
 query = ("INSERT INTO weather_attrs(timestamp, temperature, gps, pressure, humidity, session) VALUES (UTC_TIMESTAMP, %s, %s, %s, %s, %s)")
-args = (temperature, GPS_loc, pressure, humidity, ip_addr)
+args = (temperature, GPS_loc, pressure, humidity, session_id)
 #cursor.execute("INSERT INTO weather_attrs (timestamp, temperature, gps, pressure, humidity) VALUES (UTC_TIMESTAMP, '88', '32.77, 32.88', '30.10', '70')")
 cursor.execute(query, args);
 
